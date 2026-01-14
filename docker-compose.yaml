@@ -1,0 +1,8 @@
+services:
+  service-1:
+    build:
+      context: ./service
+      args:
+        GRADLE_USER_HOME: /root/.gradle-service
+    container_name: service
+    image: service

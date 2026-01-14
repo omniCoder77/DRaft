@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.2.21"
+    application
 }
 
 group = "com.ethyllium"
@@ -15,6 +16,11 @@ dependencies {
 
     implementation("org.eclipse.jetty:jetty-server:11.0.24")
     implementation("org.eclipse.jetty:jetty-servlet:11.0.24")
+
+}
+
+application {
+    mainClass.set("com.ethyllium.Mainkt")
 }
 
 kotlin {
