@@ -24,13 +24,13 @@ COPY src ./src
 
 RUN --mount=type=cache,target=${GRADLE_USER_HOME} \
     --mount=type=cache,target=${GRADLE_USER_HOME}/wrapper \
-    ./gradlew build -x test --no-daemon --console=plain
+    ./gradlew shadowJar -x test --no-daemon --console=plain
 
 FROM eclipse-temurin:21-jre-alpine AS runtime
 
 WORKDIR /app
 
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/*-all.jar app.jar
 
 EXPOSE 8080
 

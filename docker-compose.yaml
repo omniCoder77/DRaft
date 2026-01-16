@@ -1,8 +1,38 @@
 services:
+
   service-1:
     build:
       context: ./service
       args:
         GRADLE_USER_HOME: /root/.gradle-service
-    container_name: service
+    container_name: service-1
     image: service
+    environment:
+      PORT: 8080
+    ports:
+      - "8081:8080"
+
+
+  service-2:
+    build:
+      context: ./service
+      args:
+        gradle_user_home: /root/.gradle-service
+    container_name: service-2
+    image: service
+    environment:
+      PORT: 8080
+    ports:
+      - "8082:8080"
+
+  service-3:
+    build:
+      context: ./service
+      args:
+        gradle_user_home: /root/.gradle-service
+    container_name: service-3
+    image: service
+    environment:
+      PORT: 8080
+    ports:
+      - "8083:8080"
