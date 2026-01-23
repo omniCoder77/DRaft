@@ -1,0 +1,17 @@
+syntax = "proto3";
+option java_package = "com.draft.proto";
+option java_outer_classname = "RequestVoteProtos";
+option java_generate_equals_and_hash = true;
+package com.draft;
+
+message RequestVoteRequest {
+  uint64 term = 1;
+  string candidateId = 2;
+  uint64 lastLogIndex = 3;
+  uint64 lastLogTerm = 4;
+}
+
+message RequestVoteResponse {
+  uint64 term = 1;
+  bool voteGranted = 2;
+}

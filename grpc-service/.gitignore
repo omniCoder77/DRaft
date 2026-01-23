@@ -1,0 +1,8 @@
+.gradle/
+.kotlin/
+build/
+gradle/
+*.class
+*.jar
+*.bin
+*.lock

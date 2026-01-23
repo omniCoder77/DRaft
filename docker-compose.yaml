@@ -1,0 +1,50 @@
+services:
+
+  service-1:
+    build:
+      context: ./
+      dockerfile: ./service/Dockerfile
+      args:
+        GRADLE_USER_HOME: /root/.gradle-service
+    container_name: service-1
+    image: service
+    environment:
+      GRPC_PORT: 9090
+      MACHINES: service-2:9090,service-3:9090
+      PORT: 8080
+    ports:
+      - "9091:9090"
+      - "8081:8080"
+
+
+  service-2:
+    build:
+      context: ./
+      dockerfile: ./service/Dockerfile
+      args:
+        gradle_user_home: /root/.gradle-service
+    container_name: service-2
+    image: service
+    environment:
+      MACHINES: service-1:9090,service-3:9090
+      GRPC_PORT: 9090
+      PORT: 8080
+    ports:
+      - "9092:9090"
+      - "8082:8080"
+
+  service-3:
+    build:
+      context: ./
+      dockerfile: ./service/Dockerfile
+      args:
+        gradle_user_home: /root/.gradle-service
+    container_name: service-3
+    image: service
+    environment:
+      MACHINES: service-1:9090,service-2:9090
+      GRPC_PORT: 9090
+      PORT: 8080
+    ports:
+      - "9093:9090"
+      - "8083:8080"

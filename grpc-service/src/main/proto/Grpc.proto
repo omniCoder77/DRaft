@@ -1,0 +1,13 @@
+syntax = "proto3";
+option java_package = "com.draft.proto";
+option java_outer_classname = "GrpcProtos";
+option java_generate_equals_and_hash = true;
+package com.draft;
+
+import "AppendEntries.proto";
+import "RequestVote.proto";
+
+service RaftService {
+  rpc AppendEntries (stream AppendEntriesRequest) returns (stream AppendEntriesResponse);
+  rpc RequestVote (RequestVoteRequest) returns (RequestVoteResponse);
+}

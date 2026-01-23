@@ -1,0 +1,11 @@
+.gradle
+.kotlin
+build/classes
+build/distributions
+build/kotlin
+build/scripts
+build/tmp
+gradle
+.dockerignore
+.gitignore
+Dockerfile
