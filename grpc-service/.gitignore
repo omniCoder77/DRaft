@@ -6,3 +6,4 @@ gradle/
 *.jar
 *.bin
 *.lock
+!gradle/libs.versions.toml
