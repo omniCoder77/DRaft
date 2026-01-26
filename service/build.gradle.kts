@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.0.21"
-    id("com.gradleup.shadow") version "8.3.5"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.shadow)
 }
 
 group = "com.ethyllium"
@@ -11,14 +11,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-    implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
-    implementation("org.eclipse.jetty:jetty-server:11.0.24")
-    implementation("org.eclipse.jetty:jetty-servlet:11.0.24")
-    implementation ("com.ethyllium:grpc-service:1.0.0")
-    testImplementation("io.mockk:mockk:1.14.7")
-}
+    implementation(libs.jakarta.servlet)
+    implementation(libs.jetty.server)
+    implementation(libs.jetty.servlet)
+    implementation(libs.grpc.service)
 
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.mockk)
+}
 
 kotlin {
     jvmToolchain(21)

@@ -1,4 +1,4 @@
-package com.ethyllium.grpc
+package com.ethyllium.transport.grpc
 
 import io.grpc.BindableService
 import io.grpc.ServerBuilder
@@ -14,7 +14,7 @@ class GrpcServer(port: Int, service: BindableService) {
         })
     }
 
-    private fun stop() {
+    fun stop() {
         server.shutdown()
     }
 

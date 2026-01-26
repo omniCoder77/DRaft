@@ -1,4 +1,4 @@
-package com.ethyllium.http
+package com.ethyllium.transport.http
 
 import jakarta.servlet.ServletException
 import jakarta.servlet.annotation.WebServlet
@@ -9,7 +9,7 @@ import java.io.IOException
 import java.io.PrintWriter
 
 @WebServlet
-class SimpleServlet : HttpServlet() {
+class HealthServlet : HttpServlet() {
 
     @Throws(ServletException::class, IOException::class)
     protected override fun doGet(req: HttpServletRequest?, resp: HttpServletResponse) {

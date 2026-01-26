@@ -1,6 +1,6 @@
 package com.ethyllium.state
 
-data class Log(
+data class LogEntry(
     val term: Int,
     val command: String
 )
