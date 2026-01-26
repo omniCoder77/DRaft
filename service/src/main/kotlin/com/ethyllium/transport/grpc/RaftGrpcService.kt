@@ -4,7 +4,9 @@ import com.draft.proto.AppendVoteProtos
 import com.draft.proto.RaftServiceGrpcKt
 import com.draft.proto.RequestVoteProtos
 import com.ethyllium.protocol.ConsensusModule
+import jdk.jfr.internal.OldObjectSample.emit
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class RaftGrpcService(private val consensusModule: ConsensusModule) : RaftServiceGrpcKt.RaftServiceCoroutineImplBase() {
 
@@ -12,7 +14,11 @@ class RaftGrpcService(private val consensusModule: ConsensusModule) : RaftServic
         return consensusModule.handleRequestVote(request)
     }
 
-    override fun appendEntries(requests: Flow<AppendVoteProtos.AppendEntriesRequest>): Flow<AppendVoteProtos.AppendEntriesResponse> {
-        return super.appendEntries(requests)
+    override fun appendEntries(requests: Flow<AppendVoteProtos.AppendEntriesRequest>): Flow<AppendVoteProtos.AppendEntriesResponse> = flow {
+        requests.collect { req ->
+            val response = consensusModule.handleAppendEntries(req)
+            emit(response)
+        }
     }
+
 }

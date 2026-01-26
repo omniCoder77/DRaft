@@ -6,6 +6,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.read
 import kotlin.concurrent.write
 
+/**
+ * Simple file-based persistent storage for Raft state (currentTerm, votedFor).
+ * We never read from disk, but only write to it, state is cached in memory and updated when new persist in disk.
+ *
+ */
 class FileStorage(
     storageDir: File
 ) {

@@ -12,14 +12,15 @@ repositories {
 
 dependencies {
     implementation(libs.grpc.protobuf)
-    implementation(libs.grpc.netty)
 
     // api for exposing dependencies to consumers
     api(libs.protobuf.kotlin)
+    api(libs.grpc.netty)
     api(libs.grpc.stub)
     api(libs.kotlinx.coroutines.core)
     api(libs.grpc.kotlin.stub)
 
+    testImplementation("io.grpc:grpc-testing:1.68.0")
     testImplementation(kotlin("test"))
 }
 

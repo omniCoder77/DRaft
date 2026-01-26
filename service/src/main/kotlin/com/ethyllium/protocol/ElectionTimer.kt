@@ -10,6 +10,10 @@ class ElectionTimer(
     private val electionTimeoutLowerBound: Long = 150,
 ) {
 
+    init {
+        if (electionTimeoutUpperBound < electionTimeoutLowerBound) throw IllegalArgumentException("electionTimeoutUpperBound must be greater than or equal to electionTimeoutLowerBound")
+    }
+
     private val scheduler = Executors.newSingleThreadScheduledExecutor { runnable ->
         Thread(runnable, "election-timer-thread")
     }
@@ -20,7 +24,7 @@ class ElectionTimer(
      * Sets the callback to be invoked when the election timer expires.
      * @param callback The lambda function to call on election timeout.
      */
-    fun setElectionCallback(callback: () -> Unit) {
+    fun setOnElectionTimeoutCallback(callback: () -> Unit) {
         this.onElectionTimeout = callback
     }
 
@@ -43,7 +47,6 @@ class ElectionTimer(
         val timeout = Random.nextLong(electionTimeoutLowerBound, electionTimeoutUpperBound)
         electionTask = scheduler.schedule(
             {
-                startElection()
                 onElectionTimeout?.invoke()
             },
             timeout,
@@ -51,9 +54,8 @@ class ElectionTimer(
         )
     }
 
-    fun startElection() {}
-
     fun shutdown() {
         scheduler.shutdown()
+        electionTask?.cancel(true)
     }
 }

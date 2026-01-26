@@ -33,20 +33,19 @@ fun main() {
         }
     }
 
-    val cluster = Cluster(nodes = peers, myself = nodeId)
+    val cluster = Cluster(nodes = peers, myselfId = nodeId)
     val storage = FileStorage(storageDir)
     val runtimeState = RaftState()
     val timer = ElectionTimer()
 
     val consensus = ConsensusModule(
-        nodeId,
         cluster,
         storage,
         runtimeState,
         timer
     )
 
-    timer.setElectionCallback { consensus.onElectionTimeout() }
+    timer.setOnElectionTimeoutCallback { consensus.onElectionTimeout() }
     timer.resetElectionTimer()
 
     val grpcServer = GrpcServer(grpcPort, RaftGrpcService(consensus))

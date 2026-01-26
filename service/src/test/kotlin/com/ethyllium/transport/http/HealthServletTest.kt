@@ -1,13 +1,14 @@
-package com.ethyllium.http
+package com.ethyllium.transport.http
 
-import com.ethyllium.transport.http.HealthServlet
-import org.junit.jupiter.api.Test
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import io.mockk.*
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 import java.io.PrintWriter
 import java.io.StringWriter
-import org.junit.jupiter.api.Assertions.assertEquals
 
 class HealthServletTest {
 
@@ -26,7 +27,7 @@ class HealthServletTest {
         method.isAccessible = true
         method.invoke(servlet, req, resp)
 
-        assertEquals("ok", stringWriter.toString())
+        Assertions.assertEquals("ok", stringWriter.toString())
     }
 
     @Test
